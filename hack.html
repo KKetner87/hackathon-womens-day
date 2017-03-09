@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="newsPage" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+  <link href="hack.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular.js" charset="utf-8"></script>
+   <script src="module.js"></script>
+  <script src="hack_controller.js"></script>
+ 
+  <title>Hack Night</title>
+</head>
+
+<body ng-controller="newsFeed as newsCtrl" class="container-fluid">
+  <div class="row">
+    <h1 class="jumbotron">
+  THE NEWS
+  </h1>
+  </div>
+  <form class="row">
+    <div class=" col-md-10 col-md-offset-1">
+      <div class="row">
+        <label>Enter a keyword:</label>
+      </div>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Find more news here..." ng-model="newsCtrl.keywords"/>
+        <button type="submit" class="btn btn-default" ng-click="newsCtrl.searchForNews()"><span class="glyphicon glyphicon-search"></span></button>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div ng-show="newsCtrl.loading" class="loader col-md-offset-3">Loading...</div>
+    <div ng-show="newsCtrl.errorMessage" class="loader col-md-offset-3">
+      Error loading results
+    </div>
+    <div ng-show="newsCtrl.loading==false && newsCtrl.searchResults.length > 0" class="col-md-10 col-md-offset-1">
+      <table class="table">
+        <tbody class="table-striped">
+          <tr ng-repeat="result in newsCtrl.searchResults">
+            <td>
+              {{result.sectionName}}
+            </td>
+            <td>
+              <a class="btn btn-primary" href={{result.webUrl}}>
+               Go to {{newsCtrl.keywords}} articles!
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+</body>
+
+</html>
